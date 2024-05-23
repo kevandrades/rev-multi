@@ -1,0 +1,35 @@
+% ----------------------------------------------------------
+\chapter{Citações}\label{apd:cit}
+% ----------------------------------------------------------
+
+A classe UnB\TeX\ usa o pacote \texttt{abntex2cite} para formatar as referências bibliográficas conforme as regras da ABNT. O arquivo \texttt{referencias.bib}, utilizado neste documento, contém várias entradas de bibliografia, que podem ser utilizadas como modelos para incluir outras entradas e citá-las por meio dos seguintes comandos:
+\begin{verbatim}
+\cite{nome_da_entrada}
+\citeonline{nome_da_entrada}
+\citeauthoronline{nome_da_entrada}
+\citeyear{nome_da_entrada}
+\end{verbatim}
+
+Considere, por exemplo, a entrada para referência do tipo manual (\texttt{@manual}) contida no arquivo \texttt{referencias.bib}:
+\begin{verbatim}
+@manual{memoir,
+    address = {Normandy Park, WA},
+    author = {Peter Wilson and Lars Madsen},
+    organization = {The Herries Press},
+    title = {The Memoir Class for Configurable Typesetting -- User Guide},
+    url = {http://mirrors.ctan.org/macros/latex/contrib/memoir/memman.pdf},
+    urldate = {2024-01-25},
+    year = {2024}},
+\end{verbatim}
+
+Utilizando-se o comando \verb|\cite{memoir}| no arquivo \texttt{tex} correspondente a este parágrafo do \cref{apd:cit}, o resultado gerado é \cite{memoir}. Para o comando \verb|\citeonline{memoir}|, o resultado gerado é \citeonline{memoir}. Note que se o estilo de citação utilizado for o numérico, os comandos \verb|\cite| e \verb|\citeonline| geram o mesmo resultado, conforme mencionado na \cref{sec:referencias}.
+
+Os comandos \verb|\citeauthoronline| e \verb|\citeyear|, tanto no estilo autor-ano como no estilo numérico, apresentam separadamente no texto o nome dos autores e o ano da publicação. Por exemplo, podemos escrever:
+
+\begin{mdframed}[style=plainSty] % verde
+Em \citeyear{memoir}, os autores \citeauthoronline{memoir} publicaram o manual da versão v3.8.2 do pacote \textsf{memoir}.
+\end{mdframed}
+
+No arquivo \texttt{bib}, cada entrada de referência bibliográfica possuiu campos cujo preenchimento pode ser obrigatório ou opcional, a depender de seu tipo. No campo \texttt{author}, caso haja mais de um autor, seus nomes devem ser separados por \texttt{and}. Campos como \texttt{address}, \texttt{publisher} e \texttt{year} não preenchidos, podem gerar na lista de referências, respectivamente, as expressões abreviadas [\emph{S.l.}], [\emph{S.n.}] e [\emph{S.d.}] para indicar que são indeterminados. Recomenda-se o uso de programas gratuitos, como o JabRef\footnote{Disponível em: \url{https://www.jabref.org/}}, para auxiliar o preenchimento e gerenciamento de arquivos \texttt{bib}.
+
+No arquivo \texttt{referencias.bib}, além da entrada para referência do tipo manual (como no exemplo dado), há também entradas para referências do tipo artigo de periódico \cite{greenwade93}, artigo de conferência \cite{martin1997}, livro \cite{schaum1956}, capítulo de livro \cite{bates2010}, monografia \cite{morgado1990}, dissertação de mestrado \cite{macedo2005}, tese de doutorado \cite{guizzardi2005}, relatório técnico \cite{KrueBansBierDaziRash20}, dentre outras. Muitos outros exemplos podem ser encontrados em \cite{abntex2cite}.

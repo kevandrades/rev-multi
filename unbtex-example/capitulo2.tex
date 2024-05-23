@@ -1,0 +1,308 @@
+% ----------------------------------------------------------
+\chapter{Comandos do \LaTeX, do \abnTeX\ e do UnB\TeX}
+\label{cap:exemplos}
+% ----------------------------------------------------------
+
+Este capítulo ilustra o uso de comandos do \LaTeX, do \abnTeX\ e do UnB\TeX.
+
+% ---
+\section{Expressões matemáticas}
+\label{sec:mat}
+% ---
+
+Para que as expressões matemáticas fiquem na mesma linha do texto, como em $ \lim_{x \to \infty} \exp(-x) = 0 $, escreva-as entre \$ e \$.
+
+Colchetes podem ser usados para indicar o início de uma expressão matemática não numerada:
+\[
+\left|\sum_{i=1}^n a_ib_i\right|
+\le
+\left(\sum_{i=1}^n a_i^2\right)^{1/2}
+\left(\sum_{i=1}^n b_i^2\right)^{1/2}.
+\]
+
+O ambiente \texttt{equation} pode ser usado para escrever expressões matemáticas numeradas, como a seguinte:
+\begin{equation}
+  \forall x \in X, \quad \exists \: y \leq \epsilon.
+\end{equation}
+
+Se a equação fizer parte do parágrafo, não deixe no arquivo \texttt{tex} uma linha em branco entre o texto e o ambiente da equação. A linha em branco é entendida como começo de um novo parágrafo, que é iniciado com recuo e maior espaçamento.
+
+Muitos cientistas gostam de usar \LaTeX\ porque essa ferramenta possibilita escrever facilmente equações como:
+\begin{equation}
+p+\frac{1}{2}{\rho}v^2+{\rho}gh = \text{constante},
+\label{eq:bernoulli}
+\end{equation}
+em que $p$ é a pressão, $v$ é a velocidade e $h$ é a elevação, ou seja, a ``altura do tubo''. A \cref{eq:bernoulli} pode ser deduzida a partir do \textit{Teorema Trabalho-Energia}.
+
+% Definição da nomenclatura que irá para a lista de símbolos
+\nomenclature[B]{$p$}{Pressão}
+\nomenclature[B]{$v$}{Velocidade}
+\nomenclature[B]{$h$}{Elevação}
+
+A seguir são apresentados mais alguns exemplos de equações feitas com o \LaTeX:
+
+\newcommand{\vt}[1]{\mathbf{#1}}
+
+\begin{equation}\label{eq:R_f_usual}
+\vt{R}_r(t) = \vt{R}_{\chi}(t) \triangleq 
+\begin{bmatrix}
+\cos \chi_0 (t) & -\sin \chi_0 (t) & 0
+\\
+\sin \chi_0 (t) & \cos \chi_0 (t) & 0
+\\
+0 & 0 & 1
+\end{bmatrix},
+\end{equation}
+
+\begin{equation}
+\vt{L}_{ij} = 
+\begin{cases}
+-a_{ij}, & \text{se } j \neq i \text{ e } j \in \mathcal{N}_i, \\
+\sum_{k \in \mathcal{N}_i} a_{ik}, & \text{se } j = i,  \\
+0, & \text{caso contrário},
+\end{cases}
+\end{equation}
+
+\begin{equation}\label{eq:point-mass-velocity}
+\begin{split}
+\dot{V}_{i}(t) &{}= \frac{T_{i}(t) - D_i(t)}{m_i} - g \sin \gamma_{i}(t) + b_{ti}(t), \\
+\dot{\chi}_i(t) &{}= \frac{L_i(t) \sin \phi_i(t)}{m_i V_{i}(t) \cos \gamma_{i}(t)} + \frac{b_{\psi i}(t)}{V_{i}(t)\cos \gamma_{i}(t)}, \\
+\dot{\gamma}_{i}(t) &{}= \frac{L_i(t) \cos \phi_i(t)}{m_i V_{i}(t)} - \frac{g \cos \gamma_{i}(t)}{V_{i}(t)} + \frac{b_{\theta i}(t)}{V_{i}(t)}.
+\end{split}
+\end{equation}
+
+\nomenclature[C]{$\theta$}{Ângulo de arfagem}
+\nomenclature[C]{$\phi$}{Ângulo de rolamento}
+\nomenclature[C]{$\psi$}{Ângulo de guinada}
+
+\begin{subequations}
+\begin{align}
+\tau_{li}^s(t) &= \ddot{p}^d_{li}(t) - k_{d} \dot{e}_{li}(t) - k_{p} e_{li}(t), \\
+\dot{\tau}_{li}^f(t) +  \xi_{i} \tau_{li}^f(t) &= u_{li}(t),\label{eq:filtro_i} \\
+u_{li}(t) &= - \textrm{sign}(s_{li}(t))\eta. \label{eq:u_xbi}
+\end{align}
+\end{subequations}
+
+% ---
+\section{Listas}
+% ---
+
+As listas de figuras e de tabelas numeradas, inseridas após o \emph{Abstract}, são geradas automaticamente. Incluídas após a lista de tabelas, a lista de abreviaturas e siglas e a lista de símbolos são geradas pelo pacote \textsf{nomencl} e têm seus itens definidos conforme descrição a seguir.
+
+Para definir um item a ser exibido na lista de abreviaturas e siglas, próximo do texto onde a sigla ou abreviatura aparece, utilize o comando \verb|\nomenclature|. Por exemplo, para definir a sigla UnB no \cref{cap:intr}, próximo dela foi utilizado o seguinte comando:
+\begin{verbatim}
+\nomenclature[A]{UnB}{Universidade de Brasília}
+\end{verbatim}
+
+O comando \verb|\nomenclature| também é utilizado para definir os itens a serem exibidos na lista de símbolos. Por exemplo, para definir os símbolos $p$ da \cref{eq:bernoulli} e $\phi$ da \cref{eq:point-mass-velocity}, próximo deles foram utilizados os comandos:
+\begin{verbatim}
+\nomenclature[B]{$p$}{Pressão}
+\nomenclature[C]{$\phi$}{Ângulo de rolamento}
+\end{verbatim}
+
+O argumento \texttt{[A]} do comando \verb|\nomenclature[A]| indica que o item pertence à lista de abreviaturas e siglas. Já o argumento \texttt{[B]} em \verb|\nomenclature[B]| e o argumento \texttt{[C]} em \verb|\nomenclature[C]|, referem-se, respectivamente, aos grupos de símbolos romanos e gregos, que compõem a lista de símbolos. Os argumentos \texttt{[X]} e \texttt{[Z]} para o comando \verb|\nomenclature| podem ser utilizados para definir, respectivamente, os itens dos grupos de sobrescritos e subscritos da lista de símbolos. A ordem de apresentação dos grupos na lista de símbolos segue a ordem alfabética das letras que os designam.
+
+Os nomes dos grupos de símbolos (símbolos romanos, símbolos gregos, sobrescritos e subscritos), assim como as letras que os designam, podem ser alterados e novos grupos podem ser criados. Para isso, veja no arquivo da classe UnB\TeX\ (\texttt{unbtex.cls}) como o comando \verb|\nomgroup| do pacote \textsf{nomencl} é redefinido.
+
+É importante mencionar que enquanto no Overleaf, o pacote \textsf{nomencl} não necessite de nenhuma compilação adicional, em outros editores \LaTeX\ pode ser necessário compilar o documento usando, além do \texttt{pdfLaTeX}, o \texttt{Makeindex}. No TeXstudio, por exemplo, o \texttt{Makeindex} deve ser previamente configurado como a seguir:\footnote{Para mais informações: \url{https://tex.stackexchange.com/questions/27824/using-package-nomencl}}:
+\begin{verbatim}
+makeindex %.nlo -s nomencl.ist -o %.nls -t %.nlg
+\end{verbatim}
+
+% ---
+\section{Referências bibliográficas}\label{sec:referencias}
+% ---
+
+A formatação das referências bibliográficas conforme as regras da ABNT é um dos principais objetivos da classe \abnTeX\ que, para tal, disponibiliza o pacote \textsf{abntex2cite} com opções para citações nos estilos autor-ano e numérico.
+
+A classe UnB\TeX\ aproveita o pacote \textsf{abntex2cite}, mas com arquivos de estilo (extensão \texttt{bst}) modificados para contemplar atualizações mais recentes das normas NBR 6023 \cite{NBR6023:2018} e NBR 10520 \cite{NBR10520:2023}. Além das opções para citações nos estilos autor-ano e numérico, na classe UnB\TeX\ foram adicionados arquivos de estilo customizados para citações em textos escritos em inglês.
+
+Para cada referência a ser citada em arquivos de texto (extensão \texttt{tex}), é preciso criar uma entrada no arquivo de referências (extensão \texttt{bib}). Informações sobre como criar entradas em arquivos \texttt{bib} para diferentes tipos de referências (artigos em periódicos, artigos em anais de eventos, livros, capítulos de livros, etc.) e como utilizá-las, podem ser obtidas nos manuais \citeonline{abntex2cite}\footnote{Disponível em: \url{http://mirrors.ctan.org/macros/latex/contrib/abntex2/doc/abntex2cite.pdf}} e \citeonline{abntex2cite-alf}\footnote{Disponível em: \url{http://mirrors.ctan.org/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf}}. No \cref{apd:cit} há um exemplo de como criar e utilizar entradas para referências bibliográficas.
+
+Embora as normas da ABNT permitam citações utilizando o estilo numérico, é recomendado o uso do estilo autor-data em trabalhos acadêmicos. A razão é que a leitura por parte do avaliador fica mais simples. Basta ver o nome e o ano para se lembrar rapidamente da referência, sem precisar recorrer frequentemente à lista de referências, que fica no final do texto, tornando a leitura mais agradável.
+
+No estilo autor-data, as referências podem ser chamadas por meio dos comandos \verb|\cite| e \verb|\citeonline|. O último permite melhor incorporar a citação ao texto, outra vantagem do estilo autor-data. Caso prefira fazer citações utilizando o estilo numérico, no início do arquivo \texttt{tex} principal altere a opção \texttt{bib=alf} da classe UnB\TeX\ para \texttt{bib=num}. No estilo numérico as referências são chamadas pelo comando \verb|\cite| (é possível usar também o comando \verb|\citeonline|, mas com o mesmo resultado do comando \verb|\cite|).
+
+O pacote \textsf{biblatex}, com a opção \texttt{style=abnt}, também pode ser utilizado para formatar as referências bibliográficas conforme as regras da ABNT. Neste caso, o documento necessitará ser compilado pelo \texttt{biber}, que requer tempo de processamento maior que a compilação pelo \texttt{bibtex}, utilizada pelo \textsf{abntex2cite}.
+
+%-
+\subsection{Acentuação de referências bibliográficas}
+%-
+
+Normalmente não há problemas em usar caracteres acentuados em arquivos bibliográficos (\texttt{bib}). Porém, como as regras da ABNT fazem uso frequente da conversão para letras maiúsculas, é preciso observar o modo como se escreve os nomes dos autores. Na \cref{tab:acentos} você encontra alguns exemplos das conversões mais importantes. Preste atenção especial para `ç' e `í' que devem estar envoltos em chaves. A regra geral é, nos arquivos \texttt{bib}, sempre fazer a acentuação de acordo com a \cref{tab:acentos}, especialmente nas palavras que têm suas letras convertidas para maiúsculas.
+
+\begin{table}[htb]
+\begin{center}
+\caption{Tabela de conversão de acentuação}
+\label{tab:acentos}
+\begin{tabular}{llllllll} \toprule
+\multicolumn{4}{l}{acento} & \multicolumn{4}{l}{bibtex} \\ \midrule
+\`a & \'a & \~a & \^a & \verb|\`a| & \verb|\'a| & \verb|\~a| & \verb|\^a| \\
+\'e & \^e & & & \verb|\'e| & \verb|\^e| & & \\
+í & & & & \multicolumn{2}{l}{\Verb{{\'i}}} & & \\
+\'o & \~o & \^o & & \verb|\'o| & \verb|\~o| & \verb|\^o| & \\
+\'u & & & & \verb|\'u| & & & \\
+{\c c} & & & & \multicolumn{2}{l}{\Verb{{\c c}}} & & \\ \bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+% ---
+\section{Citações diretas}\label{sec:citacao}
+% ---
+
+Utilize o ambiente \texttt{citacao} para incluir citações diretas com mais de três linhas:
+\begin{citacao}
+As citações diretas, no texto, com mais de três linhas, devem ser destacadas com recuo de 4 cm da margem esquerda, com letra menor que a do texto utilizado e sem as aspas. No caso de documentos datilografados, deve-se observar apenas o recuo \cite[seção 5.3]{NBR10520:2002}.
+\end{citacao}
+
+Use o ambiente assim:
+\begin{verbatim}
+\begin{citacao}
+As citações diretas, no texto, com mais de três linhas [...] deve-se observar
+apenas o recuo \cite[seção 5.3]{NBR10520:2002}.
+\end{citacao}
+\end{verbatim}
+
+O ambiente \texttt{citacao} pode receber como parâmetro opcional um nome de idioma previamente carregado nas opções da classe UnB\TeX. Nesse caso, o texto da citação é automaticamente escrito em itálico e a hifenização (conforme comentado na \cref{sec:hifenizacao}) é ajustada para o idioma selecionado na opção do ambiente. Por exemplo:
+\begin{verbatim}
+\begin{citacao}[english]
+Text in English language in italic with correct hyphenation.
+\end{citacao}
+\end{verbatim}
+tem como resultado:
+\begin{citacao}[english]
+Text in English language in italic with correct hyphenation.
+\end{citacao}
+
+Citações simples, com até três linhas, devem ser incluídas com aspas. Observe que em \LaTeX\ as aspas iniciais são diferentes das finais: ``Amor é fogo que arde sem se ver''.
+
+% ---
+\section{Remissões internas}
+% ---
+
+Ao nomear a \cref{sec:mat} e a \cref{eq:bernoulli}, apresentamos um exemplo de remissão interna, que também pode ser feita quando indicamos o \cref{cap:exemplos}, intitulado \emph{\nameref{cap:exemplos}}. O número do capítulo indicado é \ref{cap:exemplos}, que se inicia à \cpageref{cap:exemplos}\footnote{O número da página de uma remissão pode ser obtida também assim: \pageref{cap:exemplos}.}.
+
+O código usado para produzir o texto desta seção é:
+\begin{verbatim}
+Ao nomear a \cref{sec:mat} e a \cref{eq:bernoulli}, apresentamos um 
+exemplo de remissão interna, que também pode ser feita quando indicamos
+o \cref{cap:exemplos}, intitulado \emph{\nameref{cap:exemplos}}. O
+número do capítulo indicado é \ref{cap:exemplos}, que se inicia à
+\cpageref{cap:exemplos}\footnote{O número da página de uma remissão 
+pode ser obtida também assim: \pageref{cap:exemplos}.}.
+\end{verbatim}
+
+As remissões internas neste documento foram feitas utilizando-se o pacote \textsf{cleveref}. Mais opções de uso (e de comandos) podem ser encontradas em seu manual\footnote{Disponível em \url{http://mirrors.ctan.org/macros/latex/contrib/cleveref/cleveref.pdf}}.
+
+% ---
+\section{Enumerações: alíneas e subalíneas}
+% ---
+
+Quando for necessário enumerar os diversos assuntos de uma seção que não possua título, esta deve ser
+subdividida em alíneas \cite[seção 4.2]{NBR6024:2012}:
+
+\begin{alineas}
+
+  \item os diversos assuntos que não possuam título próprio, dentro de uma mesma seção, devem ser subdivididos em alíneas; 
+  \item o texto que antecede as alíneas termina em dois pontos;
+  \item as alíneas devem ser indicadas alfabeticamente, em letra minúscula, seguida de parêntese. Utilizam-se letras dobradas, quando esgotadas as letras do alfabeto;
+  \item as letras indicativas das alíneas devem apresentar recuo em relação à margem esquerda;
+  \item o texto da alínea deve começar por letra minúscula e terminar em ponto-e-vírgula, exceto a última alínea que termina em ponto final;
+  \item o texto da alínea deve terminar em dois pontos, se houver subalínea;
+  \item a segunda e as seguintes linhas do texto da alínea começa sob a primeira letra do texto da própria alínea;
+  \item subalíneas \cite[seção 4.3]{NBR6024:2012} devem ser conforme as alíneas a   seguir:
+
+  \begin{alineas}
+     \item as subalíneas devem começar por travessão seguido de espaço;
+     \item as subalíneas devem apresentar recuo em relação à alínea;
+     \item o texto da subalínea deve começar por letra minúscula e terminar em ponto-e-vírgula. A última subalínea deve terminar em ponto final, se não houver alínea subsequente;
+     \item a segunda e as seguintes linhas do texto da subalínea começam sob a primeira letra do texto da própria subalínea.
+  \end{alineas}
+  
+  \item no \abnTeX\ estão disponíveis os ambientes \texttt{incisos} e  \texttt{subalineas} que, em suma, são o mesmo que se criar outro nível de \texttt{alineas}, como nos exemplos à seguir:
+  
+  \begin{incisos}
+    \item \textit{Um novo inciso em itálico};
+  \end{incisos}
+  
+  \item Alínea em \textbf{negrito}:
+  
+  \begin{subalineas}
+    \item \textit{Uma subalínea em itálico};
+    \item \underline{\textit{Uma subalínea em itálico e sublinhado}}; 
+  \end{subalineas}
+  
+  \item Última alínea com \emph{ênfase}.
+  
+\end{alineas}
+
+% ---
+\section{Notas de rodapé}
+% ---
+
+As notas de rodapé são detalhadas pela NBR 14724:2011 na seção 5.2.1\footnote{Caso uma série de notas sejam criadas sequencialmente, o \abnTeX\ instrui o \LaTeX\ para que uma vírgula seja colocada após cada número do expoente que indica a nota de rodapé no corpo do texto.}\footnote{Verifique se os números do expoente possuem uma vírgula para dividi-los no corpo do texto.}.
+
+% ---
+\section{Diferentes idiomas e hifenizações}
+\label{sec:hifenizacao}
+% ---
+
+O idioma principal do texto é definido no início do arquivo \texttt{tex} principal, como uma opção da classe UnB\TeX. Para português-brasileiro, utilize a opção \texttt{idioma=brazil} e para inglês, utilize a opção \texttt{idioma=english}. A opção de idioma define se nome das listas (de figuras, de tabelas, de abreviaturas e siglas, de símbolos), do sumário e das referências será em português ou inglês. Define também o idioma do rótulo das tabelas, figuras, equações, capítulos, seções, apêndices, anexos, etc.
+
+As últimas opções da classe UnB\TeX, \texttt{english} e \texttt{brazil}, referem-se a idiomas para hifenização e para uso em outros pacotes e, assim, não devem ser alteradas. Mesmo que o idioma principal do texto seja português, é possível incluir textos para serem hifenizados em inglês, como no exemplo a seguir\footnote{Extraído de: \url{http://en.wikibooks.org/wiki/LaTeX/Internationalization}}:
+
+\begin{otherlanguage*}{english}
+\textit{Text in English language. This environment switches all language-related definitions, like the language specific names for figures, tables etc. to the other language. The starred version of this environment typesets the main text according to the rules of the other language, but keeps the language specific string for ancillary things like figures, in the main language of the document. The environment hyphenrules switches only the hyphenation patterns used; it can also be used to disallow hyphenation by using the language name `nohyphenation'.}
+\end{otherlanguage*}
+
+A \cref{sec:citacao} descreve o ambiente \texttt{citacao}, que pode receber como parâmetro um idioma a ser usado para hifenização da citação.
+
+% ---
+\section{Ficha catalográfica com código Cutter-Sanborn}
+% ---
+
+A ficha catalográfica é um elemento pré-textual obrigatório para todos os trabalhos acadêmicos (teses, dissertações e trabalhos de conclusão de curso). No site da Biblioteca Central da UnB\footnote{\url{https://bce.unb.br/servicos/elaboracao-de-fichas-catalograficas/}} há mais informações a respeito. A classe UnB\TeX\ gera automaticamente a ficha catalográfica com as informações do trabalho, com opção de inclusão do código Cutter.
+
+A Tabela Cutter-Sanborn é uma codificação elaborada por Charles Ammi Cutter e, posteriormente, expandida por Kate F. Sanborn. Na Tabela Cutter-Sanborn é possível obter o código correspondente ao sobrenome do autor.
+
+Em vários sites da internet\footnote{\url{https://www.tabelacutter.com/}}\footnote{\url{https://cuttersonline.com.br/registrador-gratuito}} há ferramentas online para obtenção do código. Se o nome do primeiro autor do trabalho for, digamos, Carlos Lisboa, a entrada da ferramenta online deverá ser: 
+\begin{verbatim}
+Lisboa, Carlos
+\end{verbatim}
+Nenhuma outra informação é necessária para gerar o código que, no caso desse autor, é \texttt{769}. No arquivo \texttt{tex} principal, utilize como argumento do comando \verb|\numerocutter| apenas os números gerados, ou seja,
+\begin{verbatim}
+\numerocutter{769}
+\end{verbatim}
+Note que na ficha catalográfica gerada aparecerá \texttt{L769m}. A letra \textbf{L} maiúscula, correspondente à primeira letra do sobrenome \textbf{Lisboa}, é automaticamente adicionada na frente do número. A letra \textbf{m} minúscula, correspondente à primeira letra do título do trabalho (neste caso, \emph{Modelo de trabalho acadêmico com UnB\TeX}), é adicionada no final do número.
+
+Se seu nome for, por exemplo, Carlos de Souza, utilize 
+\begin{verbatim}
+Souza, Carlos de
+\end{verbatim}
+como entrada da ferramenta online que gera o código Cutter. Caso não deseje imprimir o código Cutter na ficha catalográfica, deixe vazio o argumento do comando \verb|\numerocutter|, isto é,
+\begin{verbatim}
+\numerocutter{}
+\end{verbatim}
+
+% ---
+\section{Inclusão de outros arquivos}\label{sec:include}
+% ---
+
+É uma boa prática dividir o seu documento em diversos arquivos, e não apenas escrever tudo em um único. Esse recurso foi utilizado neste documento. Para incluir diferentes arquivos em um arquivo principal, de modo que cada arquivo incluído fique em uma página diferente, utilize o comando:
+\begin{verbatim}
+\include{documento-a-ser-incluido}      % sem a extensão .tex
+\end{verbatim}
+
+Para incluir documentos sem que haja necessariamente quebra de páginas, utilize o comando:
+\begin{verbatim}
+\input{documento-a-ser-incluido}        % sem a extensão .tex
+\end{verbatim}
+
+Também é possível incluir no documento, páginas de arquivos \texttt{pdf}. No \cref{anx:coresunb}, por exemplo, foi incluída uma página do manual de identidade visual da UnB. Para tanto, utilizou-se o comando \verb|\includepdf| do pacote \textsf{pdfpages}.
+
+% ---
+\section{Consulte o manual da classe \abnTeX}
+% ---
+
+Consulte o manual da classe \textsf{abntex2} \cite{abntex2classe}\footnote{Disponível em: \url{http://mirrors.ctan.org/macros/latex/contrib/abntex2/doc/abntex2.pdf}} para uma referência completa dos comandos e ambientes disponíveis. Além disso, o manual possui informações adicionais sobre as normas ABNT observadas pelo \abnTeX\ e considerações sobre eventuais requisitos específicos não atendidos.
